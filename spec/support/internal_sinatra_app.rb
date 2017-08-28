@@ -1,4 +1,5 @@
 require 'sinatra'
+
 module DualDeck
   class InternalSinatraApp < Sinatra::Application
     get '/hi' do

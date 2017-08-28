@@ -61,9 +61,9 @@ describe 'super advanced dual deck recording' do
       second_response = last_response
       get '/secure-random-3'
 
-      expect(first_response.body).not_to eq(second_response.body)
-      expect(second_response.body).not_to eq(last_response.body)
-      expect(first_response.body).not_to eq(last_response.body)
+      expect(first_response.body).to eq(second_response.body)
+      expect(second_response.body).to eq(last_response.body)
+      expect(first_response.body).to eq(last_response.body)
     end
   end
 
