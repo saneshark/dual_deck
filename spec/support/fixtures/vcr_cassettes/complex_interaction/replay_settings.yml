@@ -1,0 +1,7 @@
+---
+:replay_settings:
+  :vcr_cassette_path: spec/support/fixtures/vcr_cassettes
+  :internal_cassette: complex_interaction/internal_interactions
+  :external_cassette: complex_interaction/external_interactions
+  :insecure_random: true
+  :time_freeze: 2017-08-28 14:59:34.000000000 -04:00

@@ -10,17 +10,50 @@ module DualDeck
       @feature = options[:feature]
       @record = options[:record] || :new_episodes
       @insecure_random = options[:insecure_random] || false
-      @time_freeze = options[:time_freeze]
+      @time_freeze = options[:time_freeze].try(:change, usec: 0)
 
       if @insecure_random
         require "dual_deck/insecure_random"
-        @time_freeze ||= Time.now
+        @time_freeze ||= Time.now.change(usec: 0)
       end
+      record_feature_settings unless File.exist?(feature_path)
+    end
+
+    def record_feature_settings
+      directory = File.dirname(feature_path)
+      FileUtils.mkdir_p(directory) unless File.exist?(directory)
+      File.binwrite(feature_path, { replay_settings: feature_settings }.to_yaml )
+    end
+
+    def feature_path
+      VCR.configuration.cassette_library_dir + "/#{@feature}/replay_settings.yml"
+    end
+
+    def feature_settings
+      {
+        vcr_cassette_path: relative_cassette_path,
+        internal_cassette: internal_cassette,
+        external_cassette: external_cassette,
+        insecure_random: @insecure_random,
+        time_freeze: @time_freeze
+      }
+    end
+
+    def relative_cassette_path
+      VCR.configuration.cassette_library_dir.split(Dir.pwd.to_s)[1].sub('/', '')
+    end
+
+    def internal_cassette
+      "#{@feature}/internal_interactions"
+    end
+
+    def external_cassette
+      "#{@feature}/external_interactions"
     end
 
     def call(env)
       if @feature
-        ::VCR.use_cassette("#{@feature}/internal_interactions", record: @record) do
+        ::VCR.use_cassette(feature_settings[:internal_cassette], record: @record) do
           middlewares { capture_internal_interaction(env) }
         end
       else
@@ -34,7 +67,7 @@ module DualDeck
 
     def time_freeze_middleware
       if @time_freeze
-        ::Timecop.freeze(@time_freeze.change(usec: 0)) { yield }
+        ::Timecop.freeze(@time_freeze) { yield }
       else
         yield
       end
@@ -63,7 +96,7 @@ module DualDeck
     end
 
     def capture_external_interactions
-      VCR.use_cassette("#{@feature}/external_interactions", record: @record) do
+      VCR.use_cassette(feature_settings[:external_cassette], record: @record) do
         yield
       end
     end

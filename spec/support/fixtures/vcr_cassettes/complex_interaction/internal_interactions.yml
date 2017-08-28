@@ -1,0 +1,158 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://example.org/first-time
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Host:
+      - example.org
+      Cookie:
+      - ''
+  response:
+    status:
+      code: 200
+      message: 
+    headers:
+      Content-Type:
+      - text/html;charset=utf-8
+      Content-Length:
+      - '12'
+      X-XSS-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+    body:
+      encoding: US-ASCII
+      string: '1503946774.0'
+    http_version: 
+  recorded_at: Mon, 28 Aug 2017 18:59:34 GMT
+- request:
+    method: get
+    uri: http://example.org/remote-hi
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Host:
+      - example.org
+      Cookie:
+      - ''
+  response:
+    status:
+      code: 200
+      message: 
+    headers:
+      Content-Type:
+      - text/html;charset=utf-8
+      Content-Length:
+      - '18'
+      X-XSS-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+    body:
+      encoding: UTF-8
+      string: Hello from remote!
+    http_version: 
+  recorded_at: Mon, 28 Aug 2017 18:59:34 GMT
+- request:
+    method: get
+    uri: http://example.org/secure-random-1
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Host:
+      - example.org
+      Cookie:
+      - ''
+  response:
+    status:
+      code: 200
+      message: 
+    headers:
+      Content-Type:
+      - text/html;charset=utf-8
+      Content-Length:
+      - '20'
+      X-XSS-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+    body:
+      encoding: US-ASCII
+      string: 5c5cc968c0f974157dd4
+    http_version: 
+  recorded_at: Mon, 28 Aug 2017 18:59:34 GMT
+- request:
+    method: get
+    uri: http://example.org/secure-random-2
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Host:
+      - example.org
+      Cookie:
+      - ''
+  response:
+    status:
+      code: 200
+      message: 
+    headers:
+      Content-Type:
+      - text/html;charset=utf-8
+      Content-Length:
+      - '20'
+      X-XSS-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+    body:
+      encoding: US-ASCII
+      string: 5c5cc968c0f974157dd4
+    http_version: 
+  recorded_at: Mon, 28 Aug 2017 18:59:34 GMT
+- request:
+    method: get
+    uri: http://example.org/second-time
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Host:
+      - example.org
+      Cookie:
+      - ''
+  response:
+    status:
+      code: 200
+      message: 
+    headers:
+      Content-Type:
+      - text/html;charset=utf-8
+      Content-Length:
+      - '12'
+      X-XSS-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+    body:
+      encoding: US-ASCII
+      string: '1503946774.0'
+    http_version: 
+  recorded_at: Mon, 28 Aug 2017 18:59:34 GMT
+recorded_with: VCR 3.0.3

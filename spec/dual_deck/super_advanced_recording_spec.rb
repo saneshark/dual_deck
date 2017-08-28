@@ -77,4 +77,18 @@ describe 'super advanced dual deck recording' do
       expect(external_cassette.http_interactions.interactions.count).to be(1)
     end
   end
+
+  context 'complex interaction' do
+    it 'runs the HTTP request' do
+      get '/first-time'
+      get '/remote-hi'
+      get '/secure-random-1'
+      get '/remote-hi'
+      get '/secure-random-2'
+      get '/second-time'
+
+      expect(internal_cassette.http_interactions.interactions.count).to be(5)
+      expect(external_cassette.http_interactions.interactions.count).to be(1)
+    end
+  end
 end
