@@ -19,7 +19,7 @@ module DualDeck
       def server
         raise "Sinatra app failed to boot." if @_boot_failed
         @server ||= begin
-          DualDeck::LocalhostServer.new(new)
+          DualDeck::LocalhostServer.new(new, 3001)
         rescue
           @_boot_failed = true
           raise

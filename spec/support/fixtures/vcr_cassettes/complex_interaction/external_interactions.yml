@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://localhost:63876/hi
+    uri: http://localhost:3001/hi
     body:
       encoding: US-ASCII
       string: ''
@@ -33,6 +33,6 @@ http_interactions:
     body:
       encoding: UTF-8
       string: Hello from remote!
-    http_version: 
+    http_version:
   recorded_at: Mon, 28 Aug 2017 18:59:34 GMT
 recorded_with: VCR 3.0.3
